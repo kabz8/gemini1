@@ -1,0 +1,114 @@
+Build a modern, clean, and conversion-focused eCommerce website for a medical supplies brand called “Gemini Surgicals” based in Nairobi, Kenya.
+🎨 Design Style
+Minimal, clean, and clinical aesthetic (inspired by high-end medical brands)
+Use a white base, with blue (#1E88E5 / #1565C0) and soft gradient accents (blue → purple) similar to the social media posts
+Smooth gradients for offer sections (like weekly offers banners)
+Rounded cards, soft shadows, spacious layout
+Clear product focus (large product images, simple layouts)
+UI should feel like a trusted healthcare brand
+🔤 Typography (IMPORTANT)
+Use modern geometric sans fonts similar to Inter / DM Sans but NOT those
+Use:
+Primary Font: Plus Jakarta Sans
+Secondary Font: General Sans or Satoshi
+Fallback: system-ui, sans-serif
+Typography style:
+Bold headings
+Clean readable body text
+Slightly tight letter spacing for headings
+🧩 Core Pages
+1. Homepage
+Hero section:
+Headline: “Your Trusted Partner in Medical Supplies”
+Subtext: “Affordable, reliable diagnostic and surgical equipment delivered across Kenya”
+CTA buttons: Shop Now, View Offers
+Featured Categories:
+Diagnostic Devices
+Test Kits
+Surgical Tools
+Student Kits
+Weekly Offers Section (IMPORTANT)
+Card-based layout with gradient backgrounds
+Show:
+Product image
+Discounted price (KES)
+Strikethrough old price
+Badge: “Weekly Offer”
+Featured Products (grid)
+Trust Section:
+“Free delivery within Nairobi CBD”
+“Trusted by clinics & professionals”
+“Quality verified products”
+CTA Banner:
+“Need help choosing? Talk to us on WhatsApp”
+2. Shop Page
+Grid layout (3–4 columns desktop, 2 mobile)
+Filters:
+Category
+Price range
+Availability
+Sort:
+Price low-high
+Popular
+New arrivals
+3. Product Page
+Large product image gallery
+Product title
+Price (KES)
+Discount logic (if applicable)
+Short description
+Stock status
+Quantity selector
+Add to Cart button
+WhatsApp Order button (important for Kenya market)
+Tabs:
+Description
+Specifications
+Delivery Info
+4. Cart & Checkout
+Simple checkout (mobile-first)
+Fields:
+Name
+Phone number
+Location
+Payment options:
+M-Pesa (primary)
+Cash on Delivery (optional)
+Order summary
+5. Admin Dashboard (IMPORTANT)
+Add/Edit/Delete products
+Upload product images
+Set:
+Price
+Discount price
+Category
+Stock
+Manage orders
+Toggle “Weekly Offer”
+Use Supabase for:
+Database
+Auth
+Storage
+⚙️ Tech Stack
+Frontend: Next.js (App Router)
+Styling: Tailwind CSS
+Backend: Supabase
+Deployment: Vercel
+📱 Mobile Optimization
+Fully responsive
+Sticky bottom “Add to Cart” on mobile
+Floating WhatsApp button
+💡 Extra Features
+Search functionality
+Toast notifications (added to cart, etc.)
+Loading skeletons
+Clean animations (fade/slide)
+📦 Sample Products to Preload
+OnCall Plus Glucometer
+H. Pylori Antigen Test Kit
+Suture Practicing Kit
+🎯 Overall Goal
+The website should:
+Feel clean, medical, and trustworthy
+Be simple to navigate
+Be optimized for conversions and mobile users in Kenya

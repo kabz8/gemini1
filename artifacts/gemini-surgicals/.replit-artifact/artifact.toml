@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Gemini Surgicals"
+version = "1.0.0"
+id = "artifacts/gemini-surgicals"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26001
+
+[services.development]
+run = "pnpm --filter @workspace/gemini-surgicals run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/gemini-surgicals", "run", "build" ]
+publicDir = "artifacts/gemini-surgicals/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26001"
+BASE_PATH = "/"

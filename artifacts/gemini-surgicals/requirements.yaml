@@ -1,0 +1,22 @@
+packages:
+  "framer-motion": "For smooth page transitions and micro-interactions"
+  "zustand": "For simple, persistent cart state management"
+  "react-hook-form": "For robust checkout and admin forms"
+  "@hookform/resolvers": "For form validation with Zod if needed"
+  "clsx": "For conditional class merging"
+  "tailwind-merge": "For merging tailwind classes safely"
+  "date-fns": "For formatting order dates gracefully"
+  "lucide-react": "For clinical, clean icons"
+
+images:
+  - path: "artifacts/gemini-surgicals/public/images/hero-medical.png"
+    description: "A bright, clean, premium medical environment background. Abstract soft blue gradients, very clinical and professional, showing blurred high-tech medical diagnostic equipment in a pure white room with natural light."
+    aspect_ratio: "16:9"
+  - path: "artifacts/gemini-surgicals/public/images/trust-banner.png"
+    description: "A professional medical banner showing trust and reliability. Soft blue and white tones, very minimal and clean."
+    aspect_ratio: "21:9"
+
+notes:
+  - API hooks are imported from @workspace/api-client-react
+  - Cart uses Zustand and persists to localStorage
+  - Admin uses a simple hardcoded localStorage check ('admin123') for demo purposes
