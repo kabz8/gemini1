@@ -1,14 +1,16 @@
 import { Link, useLocation } from "wouter";
-import { ShoppingCart, Search, Menu, X, Stethoscope } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, Stethoscope, Sun, Moon } from "lucide-react";
 import { useCart } from "@/store/use-cart";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useDarkMode } from "@/hooks/use-dark-mode";
 
 export function Navbar() {
   const [location] = useLocation();
   const itemCount = useCart((state) => state.getItemCount());
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -19,7 +21,6 @@ export function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Shop All", href: "/shop" },
-    { name: "Categories", href: "/shop?sort=popular" },
     { name: "Offers", href: "/shop?weeklyOffer=true" },
   ];
 
@@ -28,20 +29,25 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-border shadow-sm"
-          : "bg-white border-transparent"
+          ? "bg-card border-border shadow-sm"
+          : "bg-background border-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="bg-gradient-to-br from-primary to-blue-400 p-2 rounded-xl text-white shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="bg-primary p-2 rounded-xl text-white shadow-md group-hover:scale-105 transition-transform">
               <Stethoscope className="h-6 w-6" />
             </div>
-            <span className="font-bold text-xl tracking-tight text-foreground hidden sm:block">
-              Gemini<span className="text-primary">Surgicals</span>
-            </span>
+            <div className="hidden sm:block">
+              <span className="font-extrabold text-lg tracking-tight text-foreground">
+                Gemini
+              </span>
+              <span className="font-extrabold text-lg tracking-tight text-primary">
+                Surgicals
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -51,7 +57,7 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary relative py-2",
+                  "text-sm font-semibold transition-colors hover:text-primary relative py-2",
                   location === link.href ? "text-primary" : "text-muted-foreground"
                 )}
               >
@@ -64,25 +70,39 @@ export function Navbar() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            <Link href="/shop" className="p-2 text-muted-foreground hover:text-primary transition-colors rounded-full hover:bg-accent">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <Link
+              href="/shop"
+              className="p-2.5 text-muted-foreground hover:text-primary hover:bg-accent transition-colors rounded-xl"
+            >
               <Search className="h-5 w-5" />
             </Link>
-            
-            <Link href="/cart" className="relative p-2 text-muted-foreground hover:text-primary transition-colors rounded-full hover:bg-accent">
+
+            <Link
+              href="/cart"
+              className="relative p-2.5 text-muted-foreground hover:text-primary hover:bg-accent transition-colors rounded-xl"
+            >
               <ShoppingCart className="h-5 w-5" />
               {itemCount > 0 && (
-                <span className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 bg-destructive text-white text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center shadow-sm animate-in zoom-in">
+                <span className="absolute top-1 right-1 bg-destructive text-white text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
                   {itemCount}
                 </span>
               )}
             </Link>
 
             <button
-              className="md:hidden p-2 text-muted-foreground hover:bg-accent rounded-full"
+              onClick={toggle}
+              className="p-2.5 text-muted-foreground hover:text-primary hover:bg-accent transition-colors rounded-xl"
+              aria-label="Toggle dark mode"
+            >
+              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
+
+            <button
+              className="md:hidden p-2.5 text-muted-foreground hover:bg-accent rounded-xl"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -90,14 +110,19 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 right-0 bg-white border-b border-border shadow-lg animate-in slide-in-from-top-4">
-          <div className="px-4 py-6 space-y-4">
+        <div className="md:hidden absolute top-20 left-0 right-0 bg-card border-b border-border shadow-xl">
+          <div className="px-4 py-6 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-lg font-medium text-foreground hover:text-primary"
+                className={cn(
+                  "block py-3 px-4 rounded-xl text-base font-semibold transition-colors",
+                  location === link.href
+                    ? "bg-primary/10 text-primary"
+                    : "text-foreground hover:bg-accent"
+                )}
               >
                 {link.name}
               </Link>
