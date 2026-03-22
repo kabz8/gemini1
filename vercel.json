@@ -1,6 +1,6 @@
 {
   "buildCommand": "pnpm --filter @workspace/gemini-surgicals run build",
-  "outputDirectory": "artifacts/gemini-surgicals/dist",
+  "outputDirectory": "artifacts/gemini-surgicals/dist/public",
   "installCommand": "pnpm install",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
