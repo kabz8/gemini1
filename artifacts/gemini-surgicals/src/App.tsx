@@ -13,8 +13,6 @@ import { Home } from "@/pages/home";
 import { Shop } from "@/pages/shop";
 import { ProductDetail } from "@/pages/product-detail";
 import { Cart } from "@/pages/cart";
-import { Checkout } from "@/pages/checkout";
-import { OrderConfirmation } from "@/pages/order-confirmation";
 import { Admin } from "@/pages/admin";
 
 const queryClient = new QueryClient({
@@ -69,13 +67,7 @@ function Router() {
       <Route path="/cart">
         <MainLayout><Cart /></MainLayout>
       </Route>
-      <Route path="/checkout">
-        <MainLayout><Checkout /></MainLayout>
-      </Route>
-      <Route path="/order/:id">
-        <MainLayout><OrderConfirmation /></MainLayout>
-      </Route>
-      
+
       {/* Admin Route - No main layout (no header/footer) */}
       <Route path="/admin">
         <Admin />

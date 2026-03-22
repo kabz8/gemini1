@@ -4,7 +4,7 @@ import { formatPrice, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/store/use-cart";
 import { useState } from "react";
-import { Check, Minus, Plus, Share2, Shield, Truck, ArrowLeft, MessageCircle } from "lucide-react";
+import { Check, Minus, Plus, Share2, Shield, Truck, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ProductImage } from "@/components/product-image";
 import { motion } from "framer-motion";
@@ -48,8 +48,6 @@ export function ProductDetail() {
   };
 
   const currentPrice = product.discountPrice ?? product.price;
-  const whatsappMsg = encodeURIComponent(`Hi Gemini Surgicals, I'd like to order: ${product.name} at ${formatPrice(currentPrice)}. Please advise on delivery.`);
-  const whatsappUrl = `https://wa.me/254706072888?text=${whatsappMsg}`;
   const savePct = product.discountPrice
     ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
     : 0;
@@ -162,18 +160,10 @@ export function ProductDetail() {
               )}
 
               {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                <Button size="lg" className="flex-1 h-12 font-bold text-base" disabled={!product.inStock} onClick={handleAddToCart}>
+              <div className="pt-1">
+                <Button size="lg" className="w-full h-12 font-bold text-base" disabled={!product.inStock} onClick={handleAddToCart}>
                   <Check className="mr-2 h-4 w-4" /> Add to Cart
                 </Button>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 h-12 flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#22c55e] text-white font-bold rounded-xl transition-all hover:shadow-lg text-sm"
-                >
-                  <MessageCircle className="h-4 w-4" /> Order via WhatsApp
-                </a>
               </div>
             </div>
 
@@ -229,18 +219,10 @@ export function ProductDetail() {
       </div>
 
       {/* Sticky mobile bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-xl border-t border-border p-4 z-40 flex gap-3 shadow-2xl">
-        <Button className="flex-1 font-bold" disabled={!product.inStock} onClick={handleAddToCart}>
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-xl border-t border-border p-4 z-40 shadow-2xl">
+        <Button className="w-full font-bold" disabled={!product.inStock} onClick={handleAddToCart}>
           Add to Cart
         </Button>
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#22c55e] text-white font-bold rounded-xl transition-colors text-sm"
-        >
-          <MessageCircle className="h-4 w-4" /> WhatsApp
-        </a>
       </div>
     </div>
   );
