@@ -3,91 +3,72 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Link } from "wouter";
 import { formatPrice } from "@/lib/utils";
-import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle, Tag } from "lucide-react";
 
 const BASE = import.meta.env.BASE_URL;
 
 const SLIDES = [
   {
     id: "glucometer",
-    image: `${BASE}images/slide-glucometer.jpg`,
+    image: `${BASE}images/hero-glucometer.png`,
     tag: "Weekly Offer",
-    tagBg: "bg-pink-500",
     name: "OnCall Plus Blood Glucose Meter",
     category: "Diagnostic Devices",
+    desc: "Accurate plasma glucose readings in seconds. Comes with 50 test strips.",
     price: 1499,
     originalPrice: 1699,
-    href: "/shop",
-    blobA: "bg-blue-400",
-    blobB: "bg-sky-300",
+    accentColor: "#1a5eff",
+    href: "/product/1",
   },
   {
-    id: "centrifugal",
-    image: `${BASE}images/slide-centrifugal.jpg`,
+    id: "centrifuge",
+    image: `${BASE}images/hero-centrifuge.png`,
     tag: "Lab Essential",
-    tagBg: "bg-blue-500",
-    name: "Centrifugal Machine 800-1",
+    name: "Electric Centrifuge 800-1",
     category: "Lab Equipment",
+    desc: "High-performance centrifuge for blood separation and clinical testing.",
     price: 7500,
-    href: "/shop",
-    blobA: "bg-indigo-400",
-    blobB: "bg-blue-300",
+    accentColor: "#0ea5e9",
+    href: "/product/11",
   },
   {
-    id: "pylori",
-    image: `${BASE}images/slide-pylori.jpg`,
-    tag: "Weekly Offer",
-    tagBg: "bg-pink-600",
-    name: "H. pylori Antigen Test Kit (25s)",
+    id: "testkits",
+    image: `${BASE}images/hero-testkits.png`,
+    tag: "Best Sellers",
+    name: "Rapid Diagnostic Test Kits",
     category: "Test Kits",
-    price: 1799,
-    originalPrice: 2200,
-    href: "/shop",
-    blobA: "bg-pink-400",
-    blobB: "bg-purple-400",
+    desc: "Fast, accurate results in 25 seconds. WHO-approved antigen detection.",
+    price: 599,
+    accentColor: "#9333ea",
+    href: "/shop?category=Test+Kits",
   },
   {
     id: "suture",
-    image: `${BASE}images/slide-suture.jpg`,
-    tag: "Student Offer",
-    tagBg: "bg-orange-500",
+    image: `${BASE}images/hero-suture.png`,
+    tag: "Students",
     name: "Suture Practising Kit",
     category: "Surgical Tools",
+    desc: "Perfect for medical students. Includes suture pad, scissors & forceps.",
     price: 3649,
     originalPrice: 4299,
-    href: "/shop",
-    blobA: "bg-orange-300",
-    blobB: "bg-amber-300",
+    accentColor: "#e11d48",
+    href: "/product/6",
   },
   {
-    id: "vdrl",
-    image: `${BASE}images/slide-vdrl.jpg`,
-    tag: "Weekly Offer",
-    tagBg: "bg-purple-600",
-    name: "VDRL Syphilis Test Kit (50s)",
-    category: "Test Kits",
-    price: 899,
-    originalPrice: 1100,
-    href: "/shop",
-    blobA: "bg-purple-400",
-    blobB: "bg-fuchsia-300",
-  },
-  {
-    id: "urinalysis",
-    image: `${BASE}images/slide-urinalysis.jpg`,
-    tag: "Best Seller",
-    tagBg: "bg-teal-500",
-    name: "Urinalysis Strips 10T — 100 Strips",
-    category: "Test Kits",
-    price: 599,
-    href: "/shop",
-    blobA: "bg-teal-300",
-    blobB: "bg-cyan-300",
+    id: "diagnostics",
+    image: `${BASE}images/hero-diagnostics.png`,
+    tag: "Popular",
+    name: "Complete Diagnostic Essentials",
+    category: "Diagnostic Devices",
+    desc: "Stethoscope, BP Monitor, Pulse Oximeter & Thermometer — all in one place.",
+    price: 2500,
+    accentColor: "#059669",
+    href: "/shop?category=Diagnostic+Devices",
   },
 ];
 
 export function HeroSlider() {
-  const autoplay = Autoplay({ delay: 5000, stopOnInteraction: true });
+  const autoplay = Autoplay({ delay: 5500, stopOnInteraction: true });
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay]);
   const [current, setCurrent] = useState(0);
 
@@ -101,62 +82,92 @@ export function HeroSlider() {
     return () => { emblaApi.off("select", update); };
   }, [emblaApi]);
 
-  const slide = SLIDES[current];
-
   return (
-    <section className="relative overflow-hidden" style={{ height: "90vh", minHeight: 520, maxHeight: 800 }}>
-      {/* Ambient blobs behind everything */}
-      <div aria-hidden className={`absolute -top-32 -left-32 w-96 h-96 rounded-full ${slide.blobA} opacity-30 blur-[100px] pointer-events-none transition-colors duration-700`} />
-      <div aria-hidden className={`absolute -bottom-32 -right-32 w-96 h-96 rounded-full ${slide.blobB} opacity-25 blur-[100px] pointer-events-none transition-colors duration-700`} />
-
+    <section className="relative overflow-hidden bg-[#0a0f1e]" style={{ height: "88vh", minHeight: 560, maxHeight: 820 }}>
       {/* Embla viewport */}
       <div ref={emblaRef} className="overflow-hidden h-full">
-        <div className="flex h-full">
-          {SLIDES.map((s) => (
-            <div key={s.id} className="relative flex-[0_0_100%] h-full">
-              {/* Background image */}
-              <img
-                src={s.image}
-                alt={s.name}
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                style={{ objectPosition: "center 40%" }}
-              />
-              {/* Overlay — not a gradient, just a left-side frosted panel */}
-              <div className="absolute inset-0 bg-black/40" />
+        <div className="flex h-full touch-pan-y">
+          {SLIDES.map((slide) => (
+            <div key={slide.id} className="relative flex-[0_0_100%] h-full min-w-0">
 
-              {/* Content */}
-              <div className="absolute inset-0 flex items-end pb-16 md:items-center md:pb-0">
+              {/* Background image — full bleed, right-aligned composition */}
+              <div className="absolute inset-0">
+                <img
+                  src={slide.image}
+                  alt={slide.name}
+                  className="w-full h-full object-cover object-center"
+                  draggable={false}
+                />
+                {/* Scrim: strong on left, fade to transparent on right */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(105deg, rgba(5,8,20,0.97) 0%, rgba(5,8,20,0.85) 38%, rgba(5,8,20,0.35) 62%, rgba(5,8,20,0.08) 100%)"
+                  }}
+                />
+              </div>
+
+              {/* Content panel — floated left */}
+              <div className="absolute inset-0 flex items-center">
                 <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full">
-                  <div className="max-w-lg">
-                    <span className={`inline-block text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 ${s.tagBg}`}>
-                      {s.tag}
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-3 drop-shadow-lg">
-                      {s.name}
-                    </h2>
-                    <p className="text-white/70 text-sm mb-5">{s.category}</p>
-                    <div className="flex items-baseline gap-3 mb-7">
-                      <span className="text-4xl font-black text-white drop-shadow-lg">
-                        {formatPrice(s.price)}
+                  <div className="max-w-md xl:max-w-lg">
+
+                    {/* Tag */}
+                    <div className="flex items-center gap-2 mb-5">
+                      <span
+                        className="inline-flex items-center gap-1.5 text-white text-[11px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full"
+                        style={{ backgroundColor: slide.accentColor }}
+                      >
+                        <Tag className="h-3 w-3" />
+                        {slide.tag}
                       </span>
-                      {s.originalPrice && (
-                        <span className="text-lg text-white/50 line-through">
-                          {formatPrice(s.originalPrice)}
-                        </span>
+                      <span className="text-white/40 text-xs">{slide.category}</span>
+                    </div>
+
+                    {/* Title */}
+                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.06] mb-4 tracking-tight">
+                      {slide.name}
+                    </h2>
+
+                    {/* Description */}
+                    <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-7 max-w-sm">
+                      {slide.desc}
+                    </p>
+
+                    {/* Price */}
+                    <div className="flex items-baseline gap-3 mb-8">
+                      <span className="text-3xl sm:text-4xl font-black text-white">
+                        {formatPrice(slide.price)}
+                      </span>
+                      {slide.originalPrice && (
+                        <>
+                          <span className="text-lg text-white/35 line-through">
+                            {formatPrice(slide.originalPrice)}
+                          </span>
+                          <span
+                            className="text-xs font-black px-2.5 py-1 rounded-lg text-white"
+                            style={{ backgroundColor: slide.accentColor }}
+                          >
+                            Save {Math.round(((slide.originalPrice - slide.price) / slide.originalPrice) * 100)}%
+                          </span>
+                        </>
                       )}
                     </div>
+
+                    {/* CTAs */}
                     <div className="flex gap-3 flex-wrap">
                       <Link
-                        href={s.href}
-                        className="inline-flex items-center gap-2 bg-white text-foreground font-bold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors text-sm shadow-lg"
+                        href={slide.href}
+                        className="inline-flex items-center gap-2 text-white font-bold px-6 py-3.5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-xl text-sm"
+                        style={{ backgroundColor: slide.accentColor }}
                       >
                         Shop Now <ArrowRight className="h-4 w-4" />
                       </Link>
                       <a
-                        href={`https://wa.me/254706072888?text=Hi,%20I'd%20like%20to%20order%20${encodeURIComponent(s.name)}%20at%20KES%20${s.price}`}
+                        href={`https://wa.me/254706072888?text=Hi,%20I'd%20like%20to%20order%20${encodeURIComponent(slide.name)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#22c55e] transition-colors text-sm shadow-lg"
+                        className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-6 py-3.5 rounded-xl transition-all text-sm backdrop-blur-sm"
                       >
                         <MessageCircle className="h-4 w-4" />
                         WhatsApp Order
@@ -165,37 +176,65 @@ export function HeroSlider() {
                   </div>
                 </div>
               </div>
+
+              {/* Slide number */}
+              <div className="absolute top-6 right-6 text-white/25 text-xs font-mono tracking-widest select-none">
+                {String(SLIDES.indexOf(slide) + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Navigation arrows */}
+      {/* Prev/Next arrows */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white rounded-full p-2.5 transition-all z-10 border border-white/20"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 border border-white/15 text-white rounded-full p-2.5 transition-all backdrop-blur-sm"
         aria-label="Previous slide"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white rounded-full p-2.5 transition-all z-10 border border-white/20"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 border border-white/15 text-white rounded-full p-2.5 transition-all backdrop-blur-sm"
         aria-label="Next slide"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => emblaApi?.scrollTo(i)}
-            className={`rounded-full transition-all duration-300 ${i === current ? "bg-white w-6 h-2" : "bg-white/40 w-2 h-2"}`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+      {/* Progress dots + slide title strip at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 pb-6 px-6 sm:px-10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          {/* Dots */}
+          <div className="flex gap-1.5">
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => emblaApi?.scrollTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`rounded-full transition-all duration-400 ${
+                  i === current
+                    ? "w-8 h-2 bg-white"
+                    : "w-2 h-2 bg-white/30 hover:bg-white/60"
+                }`}
+              />
+            ))}
+          </div>
+          {/* Mini slide labels */}
+          <div className="hidden sm:flex gap-3">
+            {SLIDES.map((s, i) => (
+              <button
+                key={i}
+                onClick={() => emblaApi?.scrollTo(i)}
+                className={`text-[10px] font-semibold uppercase tracking-wider transition-all truncate max-w-[80px] ${
+                  i === current ? "text-white" : "text-white/25 hover:text-white/50"
+                }`}
+              >
+                {s.category}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
