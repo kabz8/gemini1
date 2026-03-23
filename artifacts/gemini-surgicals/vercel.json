@@ -4,6 +4,9 @@
   "outputDirectory": "dist",
   "installCommand": "cd ../../ && pnpm install --no-frozen-lockfile",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!.*\\.).*)",
+      "destination": "/index.html"
+    }
   ]
 }

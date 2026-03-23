@@ -4,6 +4,9 @@
   "outputDirectory": "artifacts/gemini-surgicals/dist",
   "installCommand": "pnpm install --no-frozen-lockfile",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!.*\\.).*)",
+      "destination": "/index.html"
+    }
   ]
 }
