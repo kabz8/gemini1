@@ -30,8 +30,8 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-white border-b border-border shadow-sm"
+          : "bg-white border-b border-border"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,7 +104,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border shadow-2xl">
+        <div className="md:hidden bg-white border-b border-border shadow-2xl">
           <div className="px-4 py-6 space-y-1 max-w-7xl mx-auto">
             {navLinks.map((link) => (
               <Link
