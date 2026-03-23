@@ -33,7 +33,9 @@ export function Shop() {
     limit: 50,
   });
 
-  const products = productsData?.products ?? [];
+  // Defensive: API may return non-array payloads; avoid `.map` crashes.
+  const categories = Array.isArray(categoriesData) ? categoriesData : [];
+  const products = Array.isArray(productsData?.products) ? productsData.products : [];
 
   return (
     <div className="min-h-screen pt-[4.5rem] bg-background">
@@ -120,7 +122,7 @@ export function Shop() {
               >
                 All Categories
               </button>
-              {categoriesData?.map((c) => (
+              {categories.map((c) => (
                 <button
                   key={c.id}
                   className={`block w-full text-left text-sm py-2 px-3 rounded-xl font-semibold transition-colors ${category === c.name ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5"}`}
