@@ -170,24 +170,39 @@ function ProductsView() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {productsData?.products.map(p => (
-                <tr key={p.id} className="hover:bg-slate-50/50 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="font-medium text-slate-900">{p.name}</div>
-                    <div className="text-xs text-slate-500">{p.categoryName}</div>
-                  </td>
-                  <td className="px-6 py-4 font-medium">{p.discountPrice ? <><span className="line-through text-slate-400 mr-2">{p.price}</span><span className="text-primary">{p.discountPrice}</span></> : p.price}</td>
-                  <td className="px-6 py-4">{p.stock}</td>
-                  <td className="px-6 py-4">
-                    {p.inStock ? <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">In Stock</span> : <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">Out of Stock</span>}
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <Button variant="ghost" size="sm" className="text-destructive hover:bg-destructive/10" onClick={() => handleDelete(p.id)}>
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              {Array.isArray(productsData?.products)
+                ? productsData.products.map((p) => (
+                    <tr key={p.id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="font-medium text-slate-900">{p.name}</div>
+                        <div className="text-xs text-slate-500">{p.categoryName}</div>
+                      </td>
+                      <td className="px-6 py-4 font-medium">
+                        {p.discountPrice ? (
+                          <>
+                            <span className="line-through text-slate-400 mr-2">{p.price}</span>
+                            <span className="text-primary">{p.discountPrice}</span>
+                          </>
+                        ) : (
+                          p.price
+                        )}
+                      </td>
+                      <td className="px-6 py-4">{p.stock}</td>
+                      <td className="px-6 py-4">
+                        {p.inStock ? (
+                          <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">In Stock</span>
+                        ) : (
+                          <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">Out of Stock</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <Button variant="ghost" size="sm" className="text-destructive hover:bg-destructive/10" onClick={() => handleDelete(p.id)}>
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                : null}
             </tbody>
           </table>
         </div>

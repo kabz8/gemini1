@@ -123,7 +123,8 @@ export function Home() {
               ? Array(6).fill(0).map((_, i) => (
                   <div key={i} className="glass-card rounded-2xl h-64 animate-pulse" />
                 ))
-              : offersData?.products?.map((product, i) => (
+              : Array.isArray(offersData?.products)
+                ? offersData.products.map((product, i) => (
                   <motion.div
                     key={product.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -155,7 +156,8 @@ export function Home() {
                       </div>
                     </Link>
                   </motion.div>
-                ))}
+                  ))
+                : null}
           </div>
         </div>
       </section>
