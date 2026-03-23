@@ -179,7 +179,8 @@ export function Home() {
               ? Array(8).fill(0).map((_, i) => (
                   <div key={i} className="glass-card rounded-2xl h-72 animate-pulse" />
                 ))
-              : featuredProducts?.slice(0, 8).map((product, i) => (
+              : Array.isArray(featuredProducts)
+                ? featuredProducts.slice(0, 8).map((product, i) => (
                   <motion.div
                     key={product.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -218,7 +219,8 @@ export function Home() {
                       </div>
                     </Link>
                   </motion.div>
-                ))}
+                ))
+                : null}
           </div>
 
           <div className="text-center mt-12">
