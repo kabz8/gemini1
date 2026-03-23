@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "pnpm --filter @workspace/gemini-surgicals run build",
   "outputDirectory": "artifacts/gemini-surgicals/dist",
-  "installCommand": "pnpm install",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
